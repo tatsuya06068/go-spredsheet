@@ -24,4 +24,21 @@ func main() {
     for _, row := range resp.Values {
         fmt.Printf("%s, %s\n", row[0], row[1])
     }
+
+	ctx := context.Background()
+
+	// 更新範囲の指定
+    valueRange := "A1:B2"
+
+	 // 更新値の指定
+	 rb := &sheets.ValueRange{
+        MajorDimension: "ROWS",
+        Values: [][]interface{}{
+            []interface{}{"123", "hoge"},
+            []interface{}{"1.23", "=B1&B1"},
+        },
+    }
+
+    srv.Spreadsheets.Values.Update(spreadsheetID, valueRange, rb).ValueInputOption("USER_ENTERED").Context(ctx).Do()
+
 }
