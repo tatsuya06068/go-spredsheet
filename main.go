@@ -6,18 +6,16 @@ import (
     "google.golang.org/api/option"
     "google.golang.org/api/sheets/v4"
 )
-var spreadsheetID = "https://docs.google.com/spreadsheets/d/1ythUvqWfra0Ihaw0D_PS7R5feJE8bCMPRSfMdlq-uts/edit"
+var spreadsheetID = "1ythUvqWfra0Ihaw0D_PS7R5feJE8bCMPRSfMdlq-uts"
 func main() {
     credential := option.WithCredentialsFile("credentials/secret.json")
     srv, err := sheets.NewService(context.TODO(), credential)
     if err != nil {
-		log.Println("1")
         log.Fatal(err)
     }
-    // readRange := "シート1!A1:B3"
-    resp, err := srv.Spreadsheets.Values.Get(spreadsheetID, "A1").Do()
+    readRange := "シート1!A1:B3"
+    resp, err := srv.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
     if err != nil {
-		log.Println("2")
         log.Fatalln(err)
     }
     if len(resp.Values) == 0 {
