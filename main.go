@@ -13,6 +13,8 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
+
+	// 読み込め
     readRange := "シート1!A1:B3"
     resp, err := srv.Spreadsheets.Values.Get(spreadsheetID, readRange).Do()
     if err != nil {
@@ -25,6 +27,7 @@ func main() {
         fmt.Printf("%s, %s\n", row[0], row[1])
     }
 
+	// 書き込み
 	ctx := context.Background()
 
 	// 更新範囲の指定
